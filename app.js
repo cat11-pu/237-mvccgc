@@ -3,13 +3,20 @@ import { visibleAt, chainOk } from "./version.js";
 import { planGc } from "./gc.js";
 
 export function render(spec) {
-  const times = spec.times || [];
-  const values = spec.values || [];
-  const snapshots = spec.snapshots || [];
-  const view = planGc(spec);
-  return { visible: view.visible || [], water: view.water || 0,
-           kept_count: view.kept_count || 0, reclaimed_count: view.reclaimed_count || 0,
-           reclaimed: view.reclaimed || [], early: view.early === undefined ? -1 : view.early,
-           count: times.length, monotone: chainOk(times),
-           tail: visibleAt([1, 4], [10, 12], 0), snap_count: snapshots.length };
+  const times = (spec && spec.times) || [];
+  const values = (spec && spec.values) || [];
+  const snapshots = (spec && spec.snapshots) || [];
+  const view = planGc({ times, values, snapshots });
+  return {
+    visible: view.visible,
+    water: view.water,
+    kept_count: view.kept_count,
+    reclaimed_count: view.reclaimed_count,
+    reclaimed: view.reclaimed,
+    early: view.early,
+    count: times.length,
+    monotone: chainOk(times),
+    tail: visibleAt([1, 4], [10, 12], 0),
+    snap_count: snapshots.length
+  };
 }
