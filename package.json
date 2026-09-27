@@ -1,0 +1,5 @@
+{
+  "name": "mvccgc",
+  "private": true,
+  "type": "module"
+}

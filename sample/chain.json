@@ -1,0 +1,7 @@
+{
+  "chain_error_code": "E_BAD_CHAIN",
+  "snapshot_error_code": "E_BAD_SNAPSHOT",
+  "times": [1, 4, 7],
+  "values": [10, 12, 15],
+  "snapshots": [2, 5, 8]
+}
